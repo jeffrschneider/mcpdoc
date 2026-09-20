@@ -1,0 +1,17 @@
+{
+  "name": "mcpdoc",
+  "version": "0.1.0",
+  "description": "Assemble a document about an MCP server from what anyone observed",
+  "type": "module",
+  "bin": {
+    "mcpdoc": "./src/cli.mjs"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "license": "Apache-2.0",
+  "scripts": {
+    "test": "node --test __tests__/mcpdoc.test.mjs"
+  }
+}
