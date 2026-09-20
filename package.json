@@ -8,9 +8,18 @@
   },
   "files": [
     "src",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "license": "Apache-2.0",
+  "homepage": "https://mcpdoc.net",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeffrschneider/mcpdoc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jeffrschneider/mcpdoc/issues"
+  },
   "scripts": {
     "test": "node --test __tests__/mcpdoc.test.mjs"
   }
