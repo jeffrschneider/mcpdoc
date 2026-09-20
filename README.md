@@ -22,14 +22,20 @@ directory listed `navigate` as taking `{ url: string }`, and the running
 server said it takes `url` **and** `sessionId`. Every one of its six tools took
 a `sessionId` the published table left out.
 
-Asking the server takes two calls and, for that server, no credential.
+Asking the server takes two calls, and for that server no credential.
 
 ## Generate one
 
 ```bash
-npx mcpdoc https://mcp.example.com/mcp            # a hosted server
-npx mcpdoc https://mcp.example.com/mcp --repo owner/name   # ...and its repository
+# a hosted server
+npx mcpdoc https://mcp.example.com/mcp --by "Your Name"
+
+# ...and its repository, for licence and upkeep
+npx mcpdoc https://mcp.example.com/mcp --repo owner/name --by "Your Name"
 ```
+
+`--by` is required. Anyone can generate one of these, so the name on a document
+is the only thing separating a publisher's own from an independent one.
 
 It writes `mcpdoc.json` (the artifact) and `mcpdoc.html` (a rendering of it).
 
@@ -37,6 +43,10 @@ It writes `mcpdoc.json` (the artifact) and `mcpdoc.html` (a rendering of it).
 
 It opens an MCP session, asks `tools/list`, and reads the repository's public
 metadata if you name one. That is all.
+
+Five calls at the very most, and usually two: one for the tool list, one for the
+repository if you named one, and between one and three to open the session,
+because it offers the newest protocol version first and steps down if refused.
 
 It never runs the server's code, never installs anything, never sends a tool
 call, and never writes anything anywhere but your own directory.

@@ -28,7 +28,7 @@ const url = args.find((a) => a.startsWith("http"));
 if (!url || has("help")) {
   console.log(`mcpdoc — a document about an MCP server, assembled from what anyone observed
 
-  mcpdoc <url> [--repo owner/name] [--by "who looked"] [--out name] [--json-only]
+  mcpdoc <url> --by "who looked" [--repo owner/name] [--out name] [--json-only]
 
   <url>        the server's endpoint, e.g. https://mcp.example.com/mcp
   --repo       a GitHub repository, for its licence, upkeep and description
@@ -42,7 +42,19 @@ It opens a session and asks what tools there are. It never calls a tool.`);
   process.exit(url ? 0 : 1);
 }
 
-const by = flag("by", "an unnamed reader");
+// --by has no default. A document nobody has put their name to says nothing
+// about whether to believe it, and quietly writing "an unnamed reader" for
+// somebody who forgot produces exactly that document without telling them.
+const by = flag("by");
+if (!by) {
+  console.error(`mcpdoc: --by is required.
+
+  Anyone can generate one of these, so the name on a document is the only
+  thing separating a publisher's own from an independent one. Put yours on it:
+
+    mcpdoc ${url} --by "Your Name"`);
+  process.exit(1);
+}
 const repoName = flag("repo");
 const out = flag("out", "mcpdoc");
 

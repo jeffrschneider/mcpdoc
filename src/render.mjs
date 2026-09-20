@@ -79,9 +79,9 @@ section>header .from{margin-left:0;flex-basis:100%;text-align:left}}
 const fRow = (label, f) => {
   if (!f) return "";
   const v = f.value === null || f.value === undefined || f.value === ""
-    ? '<span class="none">&mdash;</span>'
+    ? '<span class="none">not published</span>'
     : Array.isArray(f.value)
-      ? esc(f.value.join(", ")) || '<span class="none">&mdash;</span>'
+      ? esc(f.value.join(", ")) || '<span class="none">not published</span>'
       : typeof f.value === "boolean"
         ? `<b>${f.value ? "yes" : "no"}</b>`
         : esc(f.value);
@@ -137,7 +137,7 @@ export function render(doc) {
   return `<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${esc(F.identifiesAs?.value ?? doc.subject?.repository ?? doc.subject?.endpoint ?? "MCP server")} &mdash; MCPDoc</title>
+<title>${esc(F.identifiesAs?.value ?? doc.subject?.repository ?? doc.subject?.endpoint ?? "MCP server")} &middot; MCPDoc</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -148,10 +148,10 @@ export function render(doc) {
 <p class="src">${esc(doc.subject?.endpoint ?? "")}</p>
 ${F.does?.value ? `<p class="lede">${esc(F.does.value)}</p>` : ""}
 <div class="strip">
-  <div><span class="k">tools</span><span class="v">${doc.tools?.length ?? "&mdash;"}</span></div>
-  <div><span class="k">speaks</span><span class="v">${esc(F.speaks?.value ?? "—")}</span></div>
+  <div><span class="k">tools</span><span class="v">${doc.tools?.length ?? "not read"}</span></div>
+  <div><span class="k">speaks</span><span class="v">${esc(F.speaks?.value ?? "not read")}</span></div>
   <div><span class="k">licence</span><span class="v">${esc(F.licence?.value ?? "not stated")}</span></div>
-  <div><span class="k">upkeep</span><span class="v">${F.archived?.value === true ? "archived" : F.archived ? "active" : "—"}</span></div>
+  <div><span class="k">upkeep</span><span class="v">${F.archived?.value === true ? "archived" : F.archived ? "active" : "not stated"}</span></div>
 </div>
 <p class="legend"><span>${MK.said} the publisher&#39;s word</span><span>${MK.seen} read from the server</span><span>${MK.none} not published</span></p>
 ${about}${section("Its tools", doc.tools?.length ? `asked the running server on ${at}` : "nothing on record", toolBody)}${connection}${openList}${who}

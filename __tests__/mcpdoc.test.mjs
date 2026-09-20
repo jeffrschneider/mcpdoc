@@ -123,6 +123,19 @@ test("what nobody said is listed, never left blank", () => {
   assert.match(render(doc), /Not stated/);
 });
 
+// The strip at the top of the page used to print a bare dash for anything it
+// did not know, which is the one thing this format says never to do: a dash
+// tells a reader nothing and is silence when read aloud. It also hid WHICH
+// silence it was. The publisher not stating a licence is their gap; nobody
+// having connected is ours, and the page has to say which.
+test("an unknown value is named, never rendered as a bare dash", () => {
+  const doc = assemble({ url: "https://x.test/mcp", by: "a test" });
+  const html = render(doc);
+  assert.ok(!/>\s*(—|&mdash;)\s*</.test(html), "a value rendered as a bare dash");
+  assert.match(html, /not read/);
+  assert.match(html, /not stated/);
+});
+
 test("the tally counts what was checked against what was merely claimed", () => {
   const doc = assemble({
     url: "https://x.test/mcp",
