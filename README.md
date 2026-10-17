@@ -28,10 +28,10 @@ Asking the server takes two calls, and for that server no credential.
 
 ```bash
 # a hosted server
-npx mcpdoc https://mcp.example.com/mcp --by "Your Name"
+npx github:jeffrschneider/mcpdoc https://mcp.example.com/mcp --by "Your Name"
 
 # ...and its repository, for licence and upkeep
-npx mcpdoc https://mcp.example.com/mcp --repo owner/name --by "Your Name"
+npx github:jeffrschneider/mcpdoc https://mcp.example.com/mcp --repo owner/name --by "Your Name"
 ```
 
 `--by` is required. Anyone can generate one of these, so the name on a document
